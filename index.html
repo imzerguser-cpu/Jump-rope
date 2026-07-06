@@ -125,9 +125,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);
 .empty{text-align:center;padding:50px 20px;color:var(--tx3);}
 .empty-i{font-size:40px;margin-bottom:12px;}.empty-t{font-size:14px;font-weight:700;margin-bottom:6px;}
 .td-e{color:var(--tx3);}.td-t{font-weight:900;font-size:13px;}
-.gc-1{background:#B91C1C}.gc-2{background:#DC2626}.gc-3{background:#EA580C}.gc-4{background:#D97706}
-.gc-5{background:#CA8A04}.gc-6{background:#65A30D}.gc-7{background:#16A34A}.gc-8{background:#0D9488}
-.gc-9{background:#2563EB}.gc-10{background:#7C3AED}.gc-0{background:#9CA3AF}
+.gc-1{background:#B91C1C}.gc-2{background:#DC2626}.gc-3{background:#EA580C}.gc-4{background:#D97706}.gc-5{background:#CA8A04}.gc-6{background:#65A30D}.gc-7{background:#16A34A}.gc-8{background:#0D9488}.gc-9{background:#2563EB}.gc-10{background:#7C3AED}.gc-0{background:#9CA3AF}
 .gcb-1{background:rgba(185,28,28,.08);border:2px solid rgba(185,28,28,.2)}.gcb-2{background:rgba(220,38,38,.08);border:2px solid rgba(220,38,38,.2)}.gcb-3{background:rgba(234,88,12,.08);border:2px solid rgba(234,88,12,.2)}.gcb-4{background:rgba(217,119,6,.08);border:2px solid rgba(217,119,6,.2)}.gcb-5{background:rgba(202,138,4,.08);border:2px solid rgba(202,138,4,.2)}.gcb-6{background:rgba(101,163,13,.08);border:2px solid rgba(101,163,13,.2)}.gcb-7{background:rgba(22,163,74,.08);border:2px solid rgba(22,163,74,.2)}.gcb-8{background:rgba(13,148,136,.08);border:2px solid rgba(13,148,136,.2)}.gcb-9{background:rgba(37,99,235,.08);border:2px solid rgba(37,99,235,.2)}.gcb-10{background:rgba(124,58,237,.08);border:2px solid rgba(124,58,237,.2)}
 .gct-1{color:#B91C1C}.gct-2{color:#DC2626}.gct-3{color:#EA580C}.gct-4{color:#D97706}.gct-5{color:#CA8A04}.gct-6{color:#65A30D}.gct-7{color:#16A34A}.gct-8{color:#0D9488}.gct-9{color:#2563EB}.gct-10{color:#7C3AED}
 .mo{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;}
@@ -189,7 +187,6 @@ function autoLoad(){
     arr.forEach(ld=>{const ex=S.find(s=>s.gr===(ld.gr||ld.grade)&&s.nm===(ld.nm||ld.name));if(ex)ex.ms=ld.ms||ld.measurements||[];});
     if(typeof d.cM==='number')cM=d.cM;if(cM>=mC()&&mC()>0)cM=mC()-1;return true;}catch(e){return false;}
 }
-
 const eS=()=>{const o={};EV.forEach(e=>o[e.id]="");return o;};
 const dS=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1).toString().padStart(2,'0')+'-'+d.getDate().toString().padStart(2,'0');};
 const dToHtml=d=>(d||'').replace(/\./g,'-');
@@ -209,136 +206,41 @@ const enM=s=>{while(s.ms.length<mC()){const idx=s.ms.length;s.ms.push({date:S[0]
 
 function addMA(dateVal){const d=dateVal||dS();S.forEach(s=>s.ms.push({date:d,scores:eS()}));cM=mC()-1;autoSave();R();}
 function delMA(i){if(mC()<=1)return;S.forEach(s=>{if(i<s.ms.length)s.ms.splice(i,1);});if(cM>=mC())cM=mC()-1;autoSave();R();}
-function changeMDate(mi,newDate){if(!newDate)return;S.forEach(s=>{if(s.ms[mi])s.ms[mi].date=newDate;});autoSave();R();}
+function changeMDate(mi,nd){if(!nd)return;S.forEach(s=>{if(s.ms[mi])s.ms[mi].date=nd;});autoSave();R();}
 
 function shareDate(mi){
-  const d={v:5,type:'single',measurement:mi+1,date:S[0].ms[mi]?.date||'',students:S.map(s=>{
-    const m=s.ms[mi];if(!m)return null;const t=cT(m.scores),g=gG(t);
-    return{gr:s.gr,nm:s.nm,gd:s.gd,scores:m.scores,total:t,grade:g.g};}).filter(Boolean)};
-  dl(JSON.stringify(d,null,2),`줄넘기_${mi+1}차_${S[0].ms[mi]?.date||dS()}.json`,'application/json');
-  sm(`📤 ${mi+1}차 결과 저장 완료!`);
+  const d={v:5,type:'single',measurement:mi+1,date:S[0].ms[mi]?.date||'',students:S.map(s=>{const m=s.ms[mi];if(!m)return null;const t=cT(m.scores),g=gG(t);return{gr:s.gr,nm:s.nm,gd:s.gd,scores:m.scores,total:t,grade:g.g};}).filter(Boolean)};
+  dlF(JSON.stringify(d,null,2),`줄넘기_${mi+1}차_${S[0].ms[mi]?.date||dS()}.json`,'application/json');sm(`📤 ${mi+1}차 결과 저장!`);
 }
-function svF(){
-  dl(JSON.stringify({v:5,cM,students:S.map(s=>({gr:s.gr,nm:s.nm,gd:s.gd,ms:s.ms}))},null,2),`줄넘기_전체기록_${dS()}.json`,'application/json');
-  sm('💾 전체 기록 저장 완료!');
-}
-function dl(content,name,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();}
-
-// ── EXCEL EXPORT: structured by date / event / student ──
+function svF(){dlF(JSON.stringify({v:5,cM,students:S.map(s=>({gr:s.gr,nm:s.nm,gd:s.gd,ms:s.ms}))},null,2),`줄넘기_전체기록_${dS()}.json`,'application/json');sm('💾 전체 저장!');}
+function dlF(c,n,t){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:t}));a.download=n;a.click();}
 function exCSV(){
-  const mc=mC();if(mc===0){sm('⚠️ 측정 데이터가 없습니다.');return;}
-  let c='\uFEFF';
-  // Header row: 측정일자, 학년, 이름, 성별, [8 events], 총점, 급수
-  c+='측정회차,측정일자,학년,이름,성별';
-  EF.forEach(n=>c+=','+n);
-  c+=',총점,급수\n';
-  // One row per student per measurement
-  for(let mi=0;mi<mc;mi++){
-    const dt=S[0].ms[mi]?.date||'';
-    S.forEach(s=>{
-      if(mi>=s.ms.length)return;
-      const m=s.ms[mi],t=cT(m.scores),g=gG(t);
-      c+=`${mi+1}차,${dToDisp(dt)},${gl(s.gr)},${s.nm},${s.gd}`;
-      EV.forEach(e=>c+=`,${m.scores[e.id]}`);
-      c+=`,${t},${g.g}\n`;
-    });
-  }
-  dl(c,`줄넘기_기록_${dS()}.csv`,'text/csv;charset=utf-8;');
-  sm('📊 엑셀 내보내기 완료!');
+  const mc=mC();if(!mc){sm('⚠️ 데이터 없음');return;}
+  let c='\uFEFF측정회차,측정일자,학년,이름,성별';EF.forEach(n=>c+=','+n);c+=',총점,급수\n';
+  for(let mi=0;mi<mc;mi++){const dt=S[0].ms[mi]?.date||'';S.forEach(s=>{if(mi>=s.ms.length)return;const m=s.ms[mi],t=cT(m.scores),g=gG(t);c+=`${mi+1}차,${dToDisp(dt)},${gl(s.gr)},${s.nm},${s.gd}`;EV.forEach(e=>c+=`,${m.scores[e.id]}`);c+=`,${t},${g.g}\n`;});}
+  dlF(c,`줄넘기_기록_${dS()}.csv`,'text/csv;charset=utf-8;');sm('📊 엑셀 내보내기!');
 }
-
-// ── EXCEL (CSV) IMPORT ──
-function impCSV(){document.getElementById('fi').click();}
+function impF(){document.getElementById('fi').click();}
 document.getElementById('fi').addEventListener('change',function(e){
-  const f=e.target.files[0];if(!f)return;
-  const ext=f.name.split('.').pop().toLowerCase();
-  const r=new FileReader();
-  r.onload=function(ev){
-    if(ext==='json'){loadJSON(ev.target.result);}
-    else if(ext==='csv'){loadCSV(ev.target.result);}
-    else{alert('지원하지 않는 파일 형식입니다.');}
-  };
-  r.readAsText(f);e.target.value='';
+  const f=e.target.files[0];if(!f)return;const ext=f.name.split('.').pop().toLowerCase();
+  const r=new FileReader();r.onload=function(ev){if(ext==='json')loadJSON(ev.target.result);else if(ext==='csv')loadCSV(ev.target.result);};r.readAsText(f);e.target.value='';
 });
-
 function loadJSON(text){
   try{const d=JSON.parse(text),arr=d.s||d.students;if(!arr)throw new Error('형식 오류');
-    arr.forEach(ld=>{const g=ld.gr||ld.grade,n=ld.nm||ld.name;const ex=S.find(s=>s.gr===g&&s.nm===n);
-      if(ex){if(ld.ms||ld.measurements)ex.ms=ld.ms||ld.measurements;}});
-    cM=Math.max(0,mC()-1);autoSave();sm('📂 JSON 불러오기 완료!');R();
-  }catch(err){alert('JSON 파일 오류: '+err.message);}
+    arr.forEach(ld=>{const ex=S.find(s=>s.gr===(ld.gr||ld.grade)&&s.nm===(ld.nm||ld.name));if(ex&&(ld.ms||ld.measurements))ex.ms=ld.ms||ld.measurements;});
+    cM=Math.max(0,mC()-1);autoSave();sm('📂 JSON 불러오기!');R();}catch(err){alert('오류: '+err.message);}
 }
-
 function loadCSV(text){
-  try{
-    const lines=text.replace(/^\uFEFF/,'').split('\n').map(l=>l.trim()).filter(l=>l);
-    if(lines.length<2){alert('CSV 데이터가 없습니다.');return;}
-    // Parse header
-    const hdr=lines[0].split(',');
-    // Find column indices
-    const iRound=hdr.findIndex(h=>h.includes('회차'));
-    const iDate=hdr.findIndex(h=>h.includes('일자')||h.includes('날짜'));
-    const iGrade=hdr.findIndex(h=>h.includes('학년'));
-    const iName=hdr.findIndex(h=>h.includes('이름'));
-    // Event columns: find by matching event full names
-    const evCols=EF.map(nm=>hdr.findIndex(h=>h.includes(nm)));
-
-    if(iName<0){alert('CSV에 "이름" 열을 찾을 수 없습니다.');return;}
-
-    // Collect unique dates/rounds
-    const roundMap={};// date -> measurementIndex
-    for(let r=1;r<lines.length;r++){
-      const cols=parseCSVLine(lines[r]);
-      const dateVal=(iDate>=0?cols[iDate]:'').replace(/\./g,'-').trim();
-      const roundVal=(iRound>=0?cols[iRound]:'').replace(/[^0-9]/g,'');
-      const key=roundVal||dateVal||('row'+r);
-      if(!roundMap[key])roundMap[key]={date:dateVal,rows:[]};
-      roundMap[key].rows.push(cols);
-    }
-
-    // Ensure measurements exist
-    const rounds=Object.values(roundMap);
-    while(mC()<rounds.length){
-      const d=rounds[mC()]?.date||dS();
-      S.forEach(s=>s.ms.push({date:d,scores:eS()}));
-    }
-
-    // Fill data
-    rounds.forEach((rd,mi)=>{
-      if(rd.date)S.forEach(s=>{if(s.ms[mi])s.ms[mi].date=rd.date;});
-      rd.rows.forEach(cols=>{
-        const name=(iName>=0?cols[iName]:'').trim();
-        // Match student: try name only, or grade+name
-        let stu=S.find(s=>s.nm===name);
-        if(!stu&&iGrade>=0){
-          const grVal=(cols[iGrade]||'').replace(/학년/g,'').replace(/유치원/,'유치원').trim();
-          const grKey=grVal==='유치원'?'유치원':grVal.replace(/[^0-9]/g,'');
-          stu=S.find(s=>(s.gr===grKey||s.gr===grVal)&&s.nm===name);
-        }
-        if(!stu)return;
-        enM(stu);
-        evCols.forEach((ci,ei)=>{
-          if(ci>=0&&cols[ci]!==undefined){
-            const val=cols[ci].replace(/[^0-9.]/g,'').trim();
-            if(val)stu.ms[mi].scores[EV[ei].id]=val;
-          }
-        });
-      });
-    });
-    cM=Math.max(0,mC()-1);autoSave();sm('📂 CSV 불러오기 완료! ('+rounds.length+'회차)');R();
-  }catch(err){alert('CSV 파일 오류: '+err.message);}
+  try{const lines=text.replace(/^\uFEFF/,'').split('\n').map(l=>l.trim()).filter(l=>l);if(lines.length<2)return;
+    const hdr=lines[0].split(','),iR=hdr.findIndex(h=>h.includes('회차')),iD=hdr.findIndex(h=>h.includes('일자')||h.includes('날짜')),iG=hdr.findIndex(h=>h.includes('학년')),iN=hdr.findIndex(h=>h.includes('이름')),evC=EF.map(nm=>hdr.findIndex(h=>h.includes(nm)));
+    if(iN<0){alert('"이름" 열 없음');return;}
+    const rm={};for(let r=1;r<lines.length;r++){const c=pCSV(lines[r]),dt=(iD>=0?c[iD]:'').replace(/\./g,'-').trim(),rv=(iR>=0?c[iR]:'').replace(/[^0-9]/g,''),k=rv||dt||('r'+r);if(!rm[k])rm[k]={date:dt,rows:[]};rm[k].rows.push(c);}
+    const rds=Object.values(rm);while(mC()<rds.length){const d=rds[mC()]?.date||dS();S.forEach(s=>s.ms.push({date:d,scores:eS()}));}
+    rds.forEach((rd,mi)=>{if(rd.date)S.forEach(s=>{if(s.ms[mi])s.ms[mi].date=rd.date;});
+      rd.rows.forEach(c=>{const nm=(iN>=0?c[iN]:'').trim();let st=S.find(s=>s.nm===nm);if(!st&&iG>=0){const gv=(c[iG]||'').replace(/학년/,'').trim(),gk=gv==='유치원'?'유치원':gv.replace(/[^0-9]/g,'');st=S.find(s=>(s.gr===gk||s.gr===gv)&&s.nm===nm);}if(!st)return;enM(st);evC.forEach((ci,ei)=>{if(ci>=0&&c[ci]!==undefined){const v=c[ci].replace(/[^0-9.]/g,'').trim();if(v)st.ms[mi].scores[EV[ei].id]=v;}});});});
+    cM=Math.max(0,mC()-1);autoSave();sm('📂 CSV 불러오기!');R();}catch(err){alert('오류: '+err.message);}
 }
-
-function parseCSVLine(line){
-  const result=[];let cur='',inQ=false;
-  for(let i=0;i<line.length;i++){
-    const ch=line[i];
-    if(ch==='"'){inQ=!inQ;}
-    else if(ch===','&&!inQ){result.push(cur);cur='';}
-    else{cur+=ch;}
-  }
-  result.push(cur);return result;
-}
+function pCSV(l){const r=[];let c='',q=false;for(let i=0;i<l.length;i++){const ch=l[i];if(ch==='"')q=!q;else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}r.push(c);return r;}
 
 function sm(msg){const el=document.getElementById('smsg');if(el){el.textContent=msg;el.classList.add('on');clearTimeout(smT);smT=setTimeout(()=>el.classList.remove('on'),3000);}}
 function modal(title,desc,fn){
@@ -358,22 +260,14 @@ document.getElementById('tabs').addEventListener('click',function(e){
 function R(){rSt();rSB();rFB();({input:rI,table:rT,history:rH,ref:rR})[cV]();}
 
 function rSt(){
-  const mc=mC(),last=mc-1;
-  const comp=mc>0?S.filter(s=>s.ms.length>last&&hM(s.ms[last])):[];
+  const mc=mC(),last=mc-1;const comp=mc>0?S.filter(s=>s.ms.length>last&&hM(s.ms[last])):[];
   const dist={};comp.forEach(s=>{const g=gG(cT(s.ms[last].scores));dist[g.g]=(dist[g.g]||0)+1;});
   let h=`<span>👤 <strong>${S.length}</strong>명</span><span>📏 <strong>${mc}</strong>회차</span><span>📝 <strong>${comp.length}</strong>명</span>`;
   Object.entries(dist).sort().slice(0,4).forEach(([g,c])=>{const n=GT.find(x=>x.g===g);h+=`<span><span class="gbsm ${gc(n?n.n:0)}">${g}</span>${c}</span>`;});
-  h+=`<span class="as-ind"><span class="as-dot"></span>자동저장</span>`;
-  document.getElementById('st').innerHTML=h;
+  h+=`<span class="as-ind"><span class="as-dot"></span>자동저장</span>`;document.getElementById('st').innerHTML=h;
 }
 function rSB(){
-  document.getElementById('saveBar').innerHTML=`<div class="sbar">
-    <button class="sbtn b-save" onclick="svF()">💾 전체 저장</button>
-    <button class="sbtn b-load" onclick="impCSV()">📂 불러오기</button>
-    <button class="sbtn b-exp" onclick="exCSV()">📊 엑셀 내보내기</button>
-    <button class="sbtn b-imp" onclick="impCSV()">📥 엑셀 가져오기</button>
-    <button class="sbtn b-rst" onclick="modal('⚠️ 전체 초기화','모든 기록이 삭제됩니다.',function(){S.forEach(function(s){s.ms=[]});cM=0;autoSave();R();sm('🗑️ 초기화');})">🗑️</button>
-    <div class="smsg" id="smsg"></div></div>`;
+  document.getElementById('saveBar').innerHTML=`<div class="sbar"><button class="sbtn b-save" onclick="svF()">💾 전체 저장</button><button class="sbtn b-load" onclick="impF()">📂 불러오기</button><button class="sbtn b-exp" onclick="exCSV()">📊 엑셀 내보내기</button><button class="sbtn b-imp" onclick="impF()">📥 엑셀 가져오기</button><button class="sbtn b-rst" onclick="modal('⚠️ 전체 초기화','모든 기록이 삭제됩니다.',function(){S.forEach(function(s){s.ms=[]});cM=0;autoSave();R();sm('🗑️ 초기화');})">🗑️</button><div class="smsg" id="smsg"></div></div>`;
 }
 function rFB(){
   const f=fS();let h='<div class="fbar"><div class="gfilters">';
@@ -384,16 +278,14 @@ function rFB(){
   document.getElementById('sb').addEventListener('input',e=>{sT=e.target.value;R();});
 }
 
+// ── INPUT VIEW: KEY FIX - never full-rerender while typing ──
 function rI(){
   const fs=fS(),mc=mC();
   let h='<div class="mbar"><label>📏 회차:</label>';
   if(mc===0){
-    h+=`<input type="date" class="date-inp" id="newDate" value="${dS()}">`;
-    h+=`<button class="mbtn b-am" onclick="addMA(document.getElementById('newDate').value)">+ 1차 측정 시작</button>`;
+    h+=`<input type="date" class="date-inp" id="newDate" value="${dS()}"><button class="mbtn b-am" onclick="addMA(document.getElementById('newDate').value)">+ 1차 측정 시작</button>`;
   } else {
-    h+='<select class="msel" id="msl">';
-    for(let i=0;i<mc;i++)h+=`<option value="${i}" ${cM===i?'selected':''}>${i+1}차 (${dToDisp(S[0].ms[i].date)})</option>`;
-    h+=`</select>`;
+    h+='<select class="msel" id="msl">';for(let i=0;i<mc;i++)h+=`<option value="${i}" ${cM===i?'selected':''}>${i+1}차 (${dToDisp(S[0].ms[i].date)})</option>`;h+=`</select>`;
     h+=`<input type="date" class="date-inp" id="curDate" value="${dToHtml(S[0].ms[cM]?.date)}" title="날짜 변경">`;
     h+=`<button class="mbtn b-am" onclick="addWithDate()">+ 추가</button>`;
     if(mc>1)h+=`<button class="mbtn b-dm" onclick="modal('${cM+1}차 삭제','이 회차가 삭제됩니다.',function(){delMA(${cM});})">🗑️</button>`;
@@ -404,42 +296,55 @@ function rI(){
 
   fs.forEach((s,si)=>{
     enM(s);const m=s.ms[cM],t=cT(m.scores),g=gG(t),hi=hM(m);
-    h+=`<div class="sc"><div class="sc-hd"><div class="sc-info"><span class="sc-gt">${gl(s.gr)}</span><span class="sc-nm">${s.nm}</span><span class="sc-gd">${s.gd}</span>`;
+    // Header always shows total/grade placeholders so we never need to re-render
+    h+=`<div class="sc" data-sid="${s.id}"><div class="sc-hd"><div class="sc-info"><span class="sc-gt">${gl(s.gr)}</span><span class="sc-nm">${s.nm}</span><span class="sc-gd">${s.gd}</span>`;
     if(s.ms.length>1)h+=`<span class="sc-mc">${s.ms.length}회</span>`;
-    h+=`</div><div class="sc-res">`;
-    if(hi)h+=`<div style="text-align:right"><div class="sc-tl">총점</div><div class="sc-tv">${t}</div></div><span class="gbg ${gc(g.n)}">${g.g}</span>`;
-    h+=`</div></div><div class="sg">`;
+    h+=`</div><div class="sc-res"><div style="text-align:right"><div class="sc-tl">총점</div><div class="sc-tv" id="tv${s.id}">${hi?t:'-'}</div></div><span class="gbg ${hi?gc(g.n):'gc-0'}" id="gb${s.id}">${hi?g.g:'-'}</span></div></div><div class="sg">`;
     EV.forEach((ev,ei)=>{
       const v=m.scores[ev.id],sc=es(ev,v),pct=(sc/10)*100,bc=sc>0?sC(sc):'#E0E7EF';
       h+=`<div class="ec"><div class="ec-nm">${EF[ei]}</div><div class="ec-row"><input class="ec-inp" type="text" inputmode="decimal" value="${v}" placeholder="${ev.t?'초':'개수'}" data-sid="${s.id}" data-eid="${ev.id}" data-si="${si}" data-ei="${ei}" autocomplete="off"><span class="ec-u">${ev.u}</span></div><div class="ec-sr"><div class="sb"><div class="sbf" style="width:${pct}%;background:${bc}"></div></div><span class="ec-sc" style="color:${sc>0?sC(sc):'#D0D8E0'}">${sc}점</span></div></div>`;
     });
-    h+=`</div><div class="sum"><div class="sum-h">오래뛰기: 초 단위 (2분30초→150)</div><div><span class="sum-t">${t}</span><span class="sum-m"> / 80</span></div></div></div>`;
+    h+=`</div><div class="sum"><div class="sum-h">오래뛰기: 초 단위 (2분30초→150)</div><div><span class="sum-t" id="st${s.id}">${t}</span><span class="sum-m"> / 80</span></div></div></div>`;
   });
 
   const el=document.getElementById('vInput');el.innerHTML=h;
 
-  // Date change for current measurement
   const curDateEl=document.getElementById('curDate');
   if(curDateEl)curDateEl.addEventListener('change',function(e){changeMDate(cM,e.target.value);});
-
-  // Measurement selector
   const mslEl=document.getElementById('msl');
   if(mslEl)mslEl.addEventListener('change',e=>{cM=parseInt(e.target.value);autoSave();R();});
 
+  // ★ INPUT HANDLER: update DOM in-place, NEVER call R() ★
   el.addEventListener('input',function(e){
     if(!e.target.classList.contains('ec-inp'))return;
-    let val=e.target.value.replace(/[^0-9.]/g,'');if(val!==e.target.value)e.target.value=val;
+    // Filter non-numeric
+    let val=e.target.value.replace(/[^0-9.]/g,'');
+    if(val!==e.target.value){
+      const pos=e.target.selectionStart-1;
+      e.target.value=val;
+      e.target.setSelectionRange(pos,pos);
+    }
     const sid=parseInt(e.target.dataset.sid),eid=e.target.dataset.eid;
-    const s=S.find(x=>x.id===sid);if(s&&s.ms[cM])s.ms[cM].scores[eid]=val;
+    const s=S.find(x=>x.id===sid);if(!s||!s.ms[cM])return;
+    s.ms[cM].scores[eid]=val;
+
+    // Update this event's score bar + label (in-place)
     const card=e.target.closest('.ec'),ev=EV.find(x=>x.id===eid),sc=es(ev,val);
-    card.querySelector('.sbf').style.width=(sc/10*100)+'%';card.querySelector('.sbf').style.background=sc>0?sC(sc):'#E0E7EF';
+    const bf=card.querySelector('.sbf');bf.style.width=(sc/10*100)+'%';bf.style.background=sc>0?sC(sc):'#E0E7EF';
     const sl=card.querySelector('.ec-sc');sl.textContent=sc+'점';sl.style.color=sc>0?sC(sc):'#D0D8E0';
-    const sc2=e.target.closest('.sc'),m2=s.ms[cM],t2=cT(m2.scores),g2=gG(t2);
-    const tv=sc2.querySelector('.sc-tv');if(tv)tv.textContent=t2;
-    const gb=sc2.querySelector('.gbg');if(gb){gb.textContent=g2.g;gb.className='gbg '+gc(g2.n);}
-    const st=sc2.querySelector('.sum-t');if(st)st.textContent=t2;
-    if(!tv&&hM(m2)){R();return;}rSt();autoSave();
+
+    // Update student total + grade (in-place, elements always exist)
+    const t2=cT(s.ms[cM].scores),g2=gG(t2),hi2=hM(s.ms[cM]);
+    const tvEl=document.getElementById('tv'+sid);if(tvEl)tvEl.textContent=hi2?t2:'-';
+    const gbEl=document.getElementById('gb'+sid);if(gbEl){gbEl.textContent=hi2?g2.g:'-';gbEl.className='gbg '+(hi2?gc(g2.n):'gc-0');}
+    const stEl=document.getElementById('st'+sid);if(stEl)stEl.textContent=t2;
+
+    // Update stats header (lightweight)
+    rSt();
+    // Auto save
+    autoSave();
   });
+
   el.addEventListener('keydown',function(e){
     if(!e.target.classList.contains('ec-inp'))return;
     if(e.key==='Enter'||e.key==='Tab'){
@@ -451,95 +356,66 @@ function rI(){
   });
 }
 
-// Add measurement with date picker
 window.addWithDate=function(){
-  modal('📅 새 측정 추가','<div style="margin-bottom:8px">측정 날짜를 선택하세요:</div><input type="date" id="addDatePick" value="'+dS()+'" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;">',function(){
-    const v=document.getElementById('addDatePick')?.value;addMA(v||dS());
-  });
+  modal('📅 새 측정 추가','<div style="margin-bottom:8px">측정 날짜를 선택하세요:</div><input type="date" id="addDatePick" value="'+dS()+'" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;">',function(){addMA(document.getElementById('addDatePick')?.value||dS());});
 };
 
 function rT(){
-  const fs=fS(),mc=mC();
-  let h='<div class="tw">';
-  if(mc>0){h+='<div class="mtbar">';for(let i=0;i<mc;i++)h+=`<button class="mtb ${rM===i?'on':''}" data-rm="${i}">${i+1}차 (${dToDisp(S[0].ms[i].date).slice(5)})</button>`;
-    if(mc>1)h+=`<button class="mtb ${rM===-1?'on':''}" data-rm="-1">🏆 최고</button>`;h+='</div>';}
-  h+='<table class="rt"><thead><tr><th>#</th><th>학년</th><th>이름</th>';
-  EV.forEach((e,i)=>h+=`<th>${EF[i]}<br><span style="font-size:7px;opacity:.6">(${e.u})</span></th>`);
-  h+='<th>총점</th><th>급수</th></tr></thead><tbody>';
-  fs.forEach((s,i)=>{
-    let m;if(rM===-1){m=s.ms.length>0?s.ms[bI(s)]:{scores:eS()};}else{m=s.ms[rM]||{scores:eS()};}
-    const t=cT(m.scores),g=gG(t),hi=hM(m);
+  const fs=fS(),mc=mC();let h='<div class="tw">';
+  if(mc>0){h+='<div class="mtbar">';for(let i=0;i<mc;i++)h+=`<button class="mtb ${rM===i?'on':''}" data-rm="${i}">${i+1}차 (${dToDisp(S[0].ms[i].date).slice(5)})</button>`;if(mc>1)h+=`<button class="mtb ${rM===-1?'on':''}" data-rm="-1">🏆 최고</button>`;h+='</div>';}
+  h+='<table class="rt"><thead><tr><th>#</th><th>학년</th><th>이름</th>';EV.forEach((e,i)=>h+=`<th>${EF[i]}<br><span style="font-size:7px;opacity:.6">(${e.u})</span></th>`);h+='<th>총점</th><th>급수</th></tr></thead><tbody>';
+  fs.forEach((s,i)=>{let m;if(rM===-1){m=s.ms.length>0?s.ms[bI(s)]:{scores:eS()};}else{m=s.ms[rM]||{scores:eS()};}const t=cT(m.scores),g=gG(t),hi=hM(m);
     h+=`<tr><td style="color:var(--tx3)">${i+1}</td><td><span class="sc-gt">${gl(s.gr)}</span></td><td style="font-weight:700">${s.nm}</td>`;
-    EV.forEach(e=>{const v=m.scores[e.id],sc=es(e,v);
-      if(v!==""){const c=sc>=7?'var(--green)':sc>=4?'#CA8A04':'var(--red)';h+=`<td style="font-weight:700">${v}<br><span style="font-size:9px;font-weight:800;color:${c}">${sc}점</span></td>`;}else h+=`<td class="td-e">-</td>`;});
-    h+=`<td class="td-t">${hi?t:'-'}</td>`;
-    h+=hi?`<td><span class="gbg ${gc(g.n)}" style="font-size:10px;padding:2px 8px">${g.g}</span></td>`:`<td class="td-e">-</td>`;h+='</tr>';});
-  h+='</tbody></table></div>';
-  const el=document.getElementById('vTable');el.innerHTML=h;
+    EV.forEach(e=>{const v=m.scores[e.id],sc=es(e,v);if(v!==""){const c=sc>=7?'var(--green)':sc>=4?'#CA8A04':'var(--red)';h+=`<td style="font-weight:700">${v}<br><span style="font-size:9px;font-weight:800;color:${c}">${sc}점</span></td>`;}else h+=`<td class="td-e">-</td>`;});
+    h+=`<td class="td-t">${hi?t:'-'}</td>`;h+=hi?`<td><span class="gbg ${gc(g.n)}" style="font-size:10px;padding:2px 8px">${g.g}</span></td>`:`<td class="td-e">-</td>`;h+='</tr>';});
+  h+='</tbody></table></div>';const el=document.getElementById('vTable');el.innerHTML=h;
   el.addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(b){rM=parseInt(b.dataset.rm);R();}});
 }
 
-function makeScoreChart(s){
-  if(s.ms.length<1)return '';
-  const mc=s.ms.length,w=Math.max(280,mc*70+60),barH=120,maxT=80;
-  let svg=`<svg class="chart-svg" width="${w}" height="${barH+44}" viewBox="0 0 ${w} ${barH+44}">`;
-  for(let i=0;i<=4;i++){const y=10+barH-(i/4)*barH;svg+=`<line x1="40" y1="${y}" x2="${w-10}" y2="${y}" stroke="#E0E7EF"/><text x="36" y="${y+3}" text-anchor="end" font-size="9" fill="#A4B3C2">${Math.round(maxT*i/4)}</text>`;}
+function mkSC(s){
+  if(s.ms.length<1)return '';const mc=s.ms.length,w=Math.max(280,mc*70+60),bH=120,mT=80;
+  let v=`<svg class="chart-svg" width="${w}" height="${bH+44}" viewBox="0 0 ${w} ${bH+44}">`;
+  for(let i=0;i<=4;i++){const y=10+bH-(i/4)*bH;v+=`<line x1="40" y1="${y}" x2="${w-10}" y2="${y}" stroke="#E0E7EF"/><text x="36" y="${y+3}" text-anchor="end" font-size="9" fill="#A4B3C2">${Math.round(mT*i/4)}</text>`;}
   const bW=Math.min(36,Math.max(20,(w-80)/mc-8));
-  s.ms.forEach((m,i)=>{const t=cT(m.scores),x=50+i*((w-70)/mc),h2=(t/maxT)*barH,g=gG(t),colors=['#9CA3AF','#7C3AED','#2563EB','#0D9488','#16A34A','#65A30D','#CA8A04','#D97706','#EA580C','#DC2626','#B91C1C'],col=g.n?colors[g.n]:'#9CA3AF';
-    svg+=`<rect x="${x}" y="${10+barH-h2}" width="${bW}" height="${h2}" rx="3" fill="${col}" opacity=".85"/><text x="${x+bW/2}" y="${10+barH-h2-4}" text-anchor="middle" font-size="10" font-weight="800" fill="${col}">${t}</text><text x="${x+bW/2}" y="${barH+28}" text-anchor="middle" font-size="9" fill="#6B7D8F">${i+1}차</text><text x="${x+bW/2}" y="${barH+40}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(m.date).slice(5)}</text>`;});
-  svg+=`</svg>`;return svg;
+  s.ms.forEach((m,i)=>{const t=cT(m.scores),x=50+i*((w-70)/mc),h2=(t/mT)*bH,g=gG(t),cls=['#9CA3AF','#7C3AED','#2563EB','#0D9488','#16A34A','#65A30D','#CA8A04','#D97706','#EA580C','#DC2626','#B91C1C'],cl=g.n?cls[g.n]:'#9CA3AF';
+    v+=`<rect x="${x}" y="${10+bH-h2}" width="${bW}" height="${h2}" rx="3" fill="${cl}" opacity=".85"/><text x="${x+bW/2}" y="${10+bH-h2-4}" text-anchor="middle" font-size="10" font-weight="800" fill="${cl}">${t}</text><text x="${x+bW/2}" y="${bH+28}" text-anchor="middle" font-size="9" fill="#6B7D8F">${i+1}차</text><text x="${x+bW/2}" y="${bH+40}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(m.date).slice(5)}</text>`;});
+  v+=`</svg>`;return v;
 }
-function makeEventChart(s){
-  if(s.ms.length<2)return '';
-  const mc=s.ms.length,w=Math.max(280,mc*60+80),h=130,pad=45,top=15;
-  let svg=`<svg class="chart-svg" width="${w}" height="${h+45}" viewBox="0 0 ${w} ${h+45}">`;
-  for(let i=0;i<=5;i++){const y=top+(h/5)*(5-i);svg+=`<line x1="${pad}" y1="${y}" x2="${w-10}" y2="${y}" stroke="#F0F3F7"/><text x="${pad-4}" y="${y+3}" text-anchor="end" font-size="8" fill="#A4B3C2">${i*2}</text>`;}
-  for(let mi=0;mi<mc;mi++){const x=pad+mi*((w-pad-10)/(mc-1||1));svg+=`<text x="${x}" y="${h+top+14}" text-anchor="middle" font-size="9" fill="#6B7D8F">${mi+1}차</text><text x="${x}" y="${h+top+24}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(s.ms[mi].date).slice(5)}</text>`;}
-  EV.forEach(ev=>{const pts=s.ms.map((m,mi)=>{const sc=es(ev,m.scores[ev.id]),x=pad+mi*((w-pad-10)/(mc-1||1)),y=top+h-(sc/10)*h;return{x,y};});
-    let path='';pts.forEach((p,i)=>{path+=(i===0?'M':'L')+p.x+' '+p.y;});
-    svg+=`<path d="${path}" fill="none" stroke="${ev.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>`;
-    pts.forEach(p=>{svg+=`<circle cx="${p.x}" cy="${p.y}" r="3" fill="${ev.color}"/>`;});});
-  svg+=`</svg>`;return svg;
+function mkEC(s){
+  if(s.ms.length<2)return '';const mc=s.ms.length,w=Math.max(280,mc*60+80),h=130,p=45,tp=15;
+  let v=`<svg class="chart-svg" width="${w}" height="${h+45}" viewBox="0 0 ${w} ${h+45}">`;
+  for(let i=0;i<=5;i++){const y=tp+(h/5)*(5-i);v+=`<line x1="${p}" y1="${y}" x2="${w-10}" y2="${y}" stroke="#F0F3F7"/><text x="${p-4}" y="${y+3}" text-anchor="end" font-size="8" fill="#A4B3C2">${i*2}</text>`;}
+  for(let mi=0;mi<mc;mi++){const x=p+mi*((w-p-10)/(mc-1||1));v+=`<text x="${x}" y="${h+tp+14}" text-anchor="middle" font-size="9" fill="#6B7D8F">${mi+1}차</text><text x="${x}" y="${h+tp+24}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(s.ms[mi].date).slice(5)}</text>`;}
+  EV.forEach(ev=>{const pts=s.ms.map((m,mi)=>{const sc=es(ev,m.scores[ev.id]),x=p+mi*((w-p-10)/(mc-1||1)),y=tp+h-(sc/10)*h;return{x,y};});let d='';pts.forEach((pt,i)=>{d+=(i===0?'M':'L')+pt.x+' '+pt.y;});
+    v+=`<path d="${d}" fill="none" stroke="${ev.color}" stroke-width="2" stroke-linecap="round" opacity=".7"/>`;pts.forEach(pt=>{v+=`<circle cx="${pt.x}" cy="${pt.y}" r="3" fill="${ev.color}"/>`;});});
+  v+=`</svg>`;return v;
 }
-function makeGradeFlow(s){
-  if(s.ms.length<1)return '';
-  let h='<div class="grade-flow">';
+function mkGF(s){
+  if(s.ms.length<1)return '';let h='<div class="grade-flow">';
   s.ms.forEach((m,i)=>{const t=cT(m.scores),g=gG(t);
-    if(i>0){const pt=cT(s.ms[i-1].scores),diff=t-pt;
-      h+=`<div class="gf-arrow">${diff>0?'→ <span style="color:var(--green);font-weight:800">▲+'+diff+'</span>':diff<0?'→ <span style="color:var(--red);font-weight:800">▼'+diff+'</span>':'→ <span style="color:var(--tx3)">＝</span>'}</div>`;}
+    if(i>0){const pt=cT(s.ms[i-1].scores),d=t-pt;h+=`<div class="gf-arrow">${d>0?'→ <span style="color:var(--green);font-weight:800">▲+'+d+'</span>':d<0?'→ <span style="color:var(--red);font-weight:800">▼'+d+'</span>':'→ <span style="color:var(--tx3)">＝</span>'}</div>`;}
     h+=`<div class="gf-item"><div class="gf-label">${i+1}차 (${dToDisp(m.date).slice(5)})</div><span class="gbg ${gc(g.n)}" style="font-size:11px;padding:2px 8px">${g.g}</span><div style="font-size:10px;font-weight:800;margin-top:2px">${t}점</div></div>`;});
   h+='</div>';return h;
 }
 
 function rH(){
   const fs=fS(),mc=mC();
-  if(mc===0){document.getElementById('vHistory').innerHTML='<div class="empty"><div class="empty-i">📈</div><div class="empty-t">측정 기록 없음</div></div>';return;}
+  if(!mc){document.getElementById('vHistory').innerHTML='<div class="empty"><div class="empty-i">📈</div><div class="empty-t">측정 기록 없음</div></div>';return;}
   let h='';
   fs.forEach(s=>{
-    if(!hA(s))return;const bi=bI(s),isOpen=openH[s.id]!==false;
+    if(!hA(s))return;const bi=bI(s),io=openH[s.id]!==false;
     h+=`<div class="h-card"><div class="h-hd" data-hid="${s.id}"><div class="sc-info"><span class="sc-gt">${gl(s.gr)}</span><span class="sc-nm">${s.nm}</span><span class="sc-gd">${s.gd}</span></div><div class="sc-res">`;
     if(s.ms.length>0){const bt=cT(s.ms[bi].scores),bg=gG(bt);h+=`<div style="text-align:right"><div class="sc-tl">최고</div><div class="sc-tv">${bt}</div></div><span class="gbg ${gc(bg.n)}">${bg.g}</span>`;}
-    h+=`<span class="h-toggle ${isOpen?'open':''}">▼</span></div></div>`;
-    if(isOpen){h+=`<div class="h-body">`;
-      h+=`<div class="chart-section"><div class="chart-title">🏅 급수 변화</div>${makeGradeFlow(s)}</div>`;
-      if(s.ms.length>=1)h+=`<div class="chart-section"><div class="chart-title">📊 총점 변화</div><div class="chart-wrap">${makeScoreChart(s)}</div></div>`;
-      if(s.ms.length>=2){h+=`<div class="chart-section"><div class="chart-title">📈 종목별 점수 변화</div><div class="chart-wrap">${makeEventChart(s)}</div><div class="legend">`;
-        EV.forEach((ev,i)=>{h+=`<span class="legend-item"><span class="legend-dot" style="background:${ev.color}"></span>${EF[i]}</span>`;});h+=`</div></div>`;}
-      // Data table
-      h+=`<div class="chart-section"><div class="chart-title">📋 상세 기록</div><div style="overflow:auto"><table class="ht"><thead><tr><th>회차</th><th>날짜</th>`;
-      EV.forEach((e,i)=>h+=`<th>${EF[i]}</th>`);h+=`<th>총점</th><th>급수</th></tr></thead><tbody>`;
-      const bE={};EV.forEach(e=>{let b=-1;s.ms.forEach(m=>{const v=parseFloat(m.scores[e.id]);if(!isNaN(v)&&v>b)b=v;});bE[e.id]=b;});
-      let bT=-1;s.ms.forEach(m=>{const t=cT(m.scores);if(t>bT)bT=t;});
-      s.ms.forEach((m,mi)=>{const t=cT(m.scores),g=gG(t);
-        h+=`<tr><td style="font-weight:700">${mi+1}차</td><td style="font-size:9px;color:var(--tx3)">${dToDisp(m.date)}</td>`;
-        EV.forEach(e=>{const v=m.scores[e.id],nv=parseFloat(v),ib=!isNaN(nv)&&nv===bE[e.id]&&s.ms.length>1;
-          if(v!==""){const sc=es(e,v);h+=`<td class="${ib?'htb':''}">${v} <span style="font-size:8px;color:${sc>=7?'var(--green)':sc>=4?'#CA8A04':'var(--red)'}">${sc}</span></td>`;}
-          else h+=`<td class="td-e">-</td>`;});
-        const ibt=t===bT&&s.ms.length>1&&t>0;
-        h+=`<td style="font-weight:900;${ibt?'color:var(--green)':''}">${t}</td><td><span class="gbg ${gc(g.n)}" style="font-size:9px;padding:2px 7px">${g.g}</span></td></tr>`;});
-      h+=`</tbody></table></div></div></div>`;}
-    h+=`</div>`;
-  });
+    h+=`<span class="h-toggle ${io?'open':''}">▼</span></div></div>`;
+    if(io){h+=`<div class="h-body">`;h+=`<div class="chart-section"><div class="chart-title">🏅 급수 변화</div>${mkGF(s)}</div>`;
+      if(s.ms.length>=1)h+=`<div class="chart-section"><div class="chart-title">📊 총점 변화</div><div class="chart-wrap">${mkSC(s)}</div></div>`;
+      if(s.ms.length>=2){h+=`<div class="chart-section"><div class="chart-title">📈 종목별 점수 변화</div><div class="chart-wrap">${mkEC(s)}</div><div class="legend">`;EV.forEach((ev,i)=>{h+=`<span class="legend-item"><span class="legend-dot" style="background:${ev.color}"></span>${EF[i]}</span>`;});h+=`</div></div>`;}
+      h+=`<div class="chart-section"><div class="chart-title">📋 상세 기록</div><div style="overflow:auto"><table class="ht"><thead><tr><th>회차</th><th>날짜</th>`;EV.forEach((e,i)=>h+=`<th>${EF[i]}</th>`);h+=`<th>총점</th><th>급수</th></tr></thead><tbody>`;
+      const bE={};EV.forEach(e=>{let b=-1;s.ms.forEach(m=>{const v=parseFloat(m.scores[e.id]);if(!isNaN(v)&&v>b)b=v;});bE[e.id]=b;});let bT=-1;s.ms.forEach(m=>{const t=cT(m.scores);if(t>bT)bT=t;});
+      s.ms.forEach((m,mi)=>{const t=cT(m.scores),g=gG(t);h+=`<tr><td style="font-weight:700">${mi+1}차</td><td style="font-size:9px;color:var(--tx3)">${dToDisp(m.date)}</td>`;
+        EV.forEach(e=>{const v=m.scores[e.id],nv=parseFloat(v),ib=!isNaN(nv)&&nv===bE[e.id]&&s.ms.length>1;if(v!==""){const sc=es(e,v);h+=`<td class="${ib?'htb':''}">${v} <span style="font-size:8px;color:${sc>=7?'var(--green)':sc>=4?'#CA8A04':'var(--red)'}">${sc}</span></td>`;}else h+=`<td class="td-e">-</td>`;});
+        const ibt=t===bT&&s.ms.length>1&&t>0;h+=`<td style="font-weight:900;${ibt?'color:var(--green)':''}">${t}</td><td><span class="gbg ${gc(g.n)}" style="font-size:9px;padding:2px 7px">${g.g}</span></td></tr>`;});
+      h+=`</tbody></table></div></div></div>`;}h+=`</div>`;});
   if(!h)h='<div class="empty"><div>입력된 기록이 없습니다.</div></div>';
   const el=document.getElementById('vHistory');el.innerHTML=h;
   el.addEventListener('click',e=>{const hdr=e.target.closest('[data-hid]');if(hdr){const id=parseInt(hdr.dataset.hid);openH[id]=openH[id]===false?true:false;rH();}});
@@ -547,22 +423,13 @@ function rH(){
 
 function rR(){
   let h='<div class="rs"><div class="rh"><div class="rh-t">📋 종목별 점수 기준표</div><div class="rh-d">대한줄넘기협회 제정</div></div><table class="rft"><thead><tr><th>종목</th>';
-  for(let i=10;i>=1;i--)h+=`<th>${i}점</th>`;
-  h+='</tr></thead><tbody>';EV.forEach((e,i)=>{h+=`<tr><td class="ecol">${EF[i]}<small>(${e.u})</small></td>`;e.lb.forEach(l=>h+=`<td>${l}</td>`);h+='</tr>';});h+='</tbody></table></div>';
-  h+='<div class="rs"><div class="rh"><div class="rh-t">🏅 급수 기준표</div><div class="rh-d">8종목 총점 합계 (만점 80점)</div></div><div class="gcards">';
-  GT.forEach(g=>{h+=`<div class="gci ${gcb(g.n)}"><div class="gci-n ${gct(g.n)}">${g.g}</div><div class="gci-m" style="color:var(--tx2)">${g.m}점 이상</div></div>`;});h+='</div></div>';
-  h+=`<div class="ibox"><h3>💡 사용 안내</h3><p>
-  <strong>✅ 자동 저장:</strong> 입력 즉시 브라우저에 저장. 닫아도 유지.<br>
-  <strong>📅 날짜 지정:</strong> 측정 추가 시 날짜를 직접 선택. 기존 회차 날짜도 변경 가능.<br>
-  <strong>📤 회차별 공유:</strong> "공유" 버튼으로 해당 날짜 결과만 파일로 저장.<br>
-  <strong>📊 엑셀 내보내기:</strong> CSV 파일로 저장 → 엑셀에서 열기. 날짜별·학생별·영역별로 정리.<br>
-  <strong>📥 엑셀 가져오기:</strong> 내보낸 CSV를 수정 후 다시 가져오기 가능. 엑셀에서 기록 편집 후 업로드하면 자동 반영.<br>
-  <strong>⌨️ 입력:</strong> 키보드로 숫자 직접 입력. Enter/Tab→다음. 오래뛰기는 초 (2분30초→150).</p></div>`;
+  for(let i=10;i>=1;i--)h+=`<th>${i}점</th>`;h+='</tr></thead><tbody>';EV.forEach((e,i)=>{h+=`<tr><td class="ecol">${EF[i]}<small>(${e.u})</small></td>`;e.lb.forEach(l=>h+=`<td>${l}</td>`);h+='</tr>';});h+='</tbody></table></div>';
+  h+='<div class="rs"><div class="rh"><div class="rh-t">🏅 급수 기준표</div><div class="rh-d">8종목 총점 합계 (만점 80점)</div></div><div class="gcards">';GT.forEach(g=>{h+=`<div class="gci ${gcb(g.n)}"><div class="gci-n ${gct(g.n)}">${g.g}</div><div class="gci-m" style="color:var(--tx2)">${g.m}점 이상</div></div>`;});h+='</div></div>';
+  h+=`<div class="ibox"><h3>💡 사용 안내</h3><p><strong>✅ 자동 저장:</strong> 입력 즉시 저장. 브라우저 닫아도 유지.<br><strong>📅 날짜 지정:</strong> 측정 추가 시 날짜 선택 가능. 기존 회차 날짜도 변경 가능.<br><strong>📤 회차별 공유:</strong> "공유" 버튼으로 날짜별 결과 파일 저장.<br><strong>📊 엑셀 내보내기:</strong> 날짜별·학생별·영역별 CSV 저장.<br><strong>📥 엑셀 가져오기:</strong> 수정한 CSV 업로드하면 자동 반영.<br><strong>⌨️ 입력:</strong> 키보드 숫자 직접 입력. Enter/Tab→다음. 오래뛰기는 초 (2분30초→150).</p></div>`;
   document.getElementById('vRef').innerHTML=h;
 }
 
-const loaded=autoLoad();R();
-if(loaded&&mC()>0)sm('✅ 저장된 기록을 불러왔습니다.');
+const loaded=autoLoad();R();if(loaded&&mC()>0)sm('✅ 저장된 기록을 불러왔습니다.');
 </script>
 </body>
 </html>
