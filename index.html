@@ -27,8 +27,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);
 .stats{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;font-size:10px;opacity:.85;}
 .stats strong{font-weight:800;}
 .gbsm{display:inline-block;padding:0 5px;border-radius:3px;font-size:8px;font-weight:800;color:#fff;margin-right:2px;vertical-align:middle;}
-.as-ind{font-size:9px;opacity:.7;margin-left:auto;display:flex;align-items:center;gap:4px;}
-.as-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;display:inline-block;}
+.sync-ind{font-size:9px;opacity:.7;margin-left:auto;display:flex;align-items:center;gap:4px;}
+.sync-dot{width:6px;height:6px;border-radius:50%;display:inline-block;}
+.sync-on{background:#4ADE80;}
+.sync-off{background:#F59E0B;}
+.sync-err{background:#EF4444;}
 .tabs{display:flex;gap:2px;background:rgba(255,255,255,.12);border-radius:8px;padding:2px;margin-top:10px;}
 .tab{flex:1;padding:7px 4px;border:none;border-radius:6px;cursor:pointer;font-size:10px;font-weight:700;background:transparent;color:rgba(255,255,255,.6);font-family:inherit;text-align:center;transition:.15s;}
 .tab.on{background:#fff;color:var(--navy);}
@@ -90,50 +93,29 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);
 .h-card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);margin:0 10px 14px;overflow:hidden;}
 .h-hd{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;background:#F0FAFF;border-bottom:1px solid var(--bdr);cursor:pointer;}
 .h-body{padding:12px;}
-.h-toggle{font-size:12px;color:var(--tx3);transition:transform .2s;display:inline-block;}
-.h-toggle.open{transform:rotate(180deg);}
-.chart-section{margin-bottom:16px;}
-.chart-title{font-size:11px;font-weight:800;color:var(--tx2);margin-bottom:6px;}
-.chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-.chart-svg{display:block;}
-.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
-.legend-item{display:flex;align-items:center;gap:3px;font-size:9px;color:var(--tx2);}
-.legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
-.grade-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px;}
-.gf-item{text-align:center;}.gf-arrow{font-size:14px;color:var(--tx3);}
+.h-toggle{font-size:12px;color:var(--tx3);transition:transform .2s;display:inline-block;}.h-toggle.open{transform:rotate(180deg);}
+.chart-section{margin-bottom:16px;}.chart-title{font-size:11px;font-weight:800;color:var(--tx2);margin-bottom:6px;}
+.chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}.chart-svg{display:block;}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}.legend-item{display:flex;align-items:center;gap:3px;font-size:9px;color:var(--tx2);}.legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+.grade-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px;}.gf-item{text-align:center;}.gf-arrow{font-size:14px;color:var(--tx3);}
 .ht{width:100%;border-collapse:collapse;font-size:10px;}
 .ht th{padding:6px 5px;background:var(--navy);color:#fff;font-size:9px;font-weight:700;white-space:nowrap;text-align:center;}
 .ht td{padding:5px 4px;text-align:center;border-bottom:1px solid #F0F3F7;font-size:10px;}
-.ht tbody tr:nth-child(even){background:#FAFBFD;}
-.htb{background:#ECFDF5 !important;font-weight:800;color:var(--green);}
+.ht tbody tr:nth-child(even){background:#FAFBFD;}.htb{background:#ECFDF5 !important;font-weight:800;color:var(--green);}
 .rs{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:auto;margin:0 10px 14px;-webkit-overflow-scrolling:touch;}
-.rh{padding:12px 14px;border-bottom:2px solid var(--bdr);}
-.rh-t{font-size:14px;font-weight:900;}.rh-d{font-size:10px;color:var(--tx3);margin-top:1px;}
-.rft{width:100%;border-collapse:collapse;}
-.rft thead tr{background:var(--navy);color:#fff;}
-.rft th{padding:7px 6px;font-size:9px;font-weight:800;white-space:nowrap;text-align:center;}
-.rft td{padding:6px 5px;text-align:center;font-size:11px;border-bottom:1px solid #F0F3F7;font-weight:600;}
-.rft tbody tr:nth-child(even){background:#FAFBFD;}
-.rft .ecol{font-weight:800;text-align:left;white-space:nowrap;font-size:10px;}
-.rft .ecol small{display:block;font-size:8px;color:var(--tx3);font-weight:400;}
-.gcards{padding:14px;display:flex;flex-wrap:wrap;gap:7px;}
-.gci{border-radius:8px;padding:10px 12px;text-align:center;min-width:70px;flex:1 1 70px;}
-.gci-n{font-size:16px;font-weight:900;}.gci-m{font-size:10px;margin-top:1px;}
-.ibox{background:#FFF3D6;border-radius:var(--r);padding:14px;border:1px solid #F5DFA0;margin:0 10px 14px;}
-.ibox h3{font-size:12px;font-weight:800;color:#7C5A00;margin-bottom:4px;}
-.ibox p{font-size:10px;color:#6B5B3E;line-height:1.8;}
-.empty{text-align:center;padding:50px 20px;color:var(--tx3);}
-.empty-i{font-size:40px;margin-bottom:12px;}.empty-t{font-size:14px;font-weight:700;margin-bottom:6px;}
+.rh{padding:12px 14px;border-bottom:2px solid var(--bdr);}.rh-t{font-size:14px;font-weight:900;}.rh-d{font-size:10px;color:var(--tx3);margin-top:1px;}
+.rft{width:100%;border-collapse:collapse;}.rft thead tr{background:var(--navy);color:#fff;}.rft th{padding:7px 6px;font-size:9px;font-weight:800;white-space:nowrap;text-align:center;}.rft td{padding:6px 5px;text-align:center;font-size:11px;border-bottom:1px solid #F0F3F7;font-weight:600;}.rft tbody tr:nth-child(even){background:#FAFBFD;}.rft .ecol{font-weight:800;text-align:left;white-space:nowrap;font-size:10px;}.rft .ecol small{display:block;font-size:8px;color:var(--tx3);font-weight:400;}
+.gcards{padding:14px;display:flex;flex-wrap:wrap;gap:7px;}.gci{border-radius:8px;padding:10px 12px;text-align:center;min-width:70px;flex:1 1 70px;}.gci-n{font-size:16px;font-weight:900;}.gci-m{font-size:10px;margin-top:1px;}
+.ibox{background:#FFF3D6;border-radius:var(--r);padding:14px;border:1px solid #F5DFA0;margin:0 10px 14px;}.ibox h3{font-size:12px;font-weight:800;color:#7C5A00;margin-bottom:4px;}.ibox p{font-size:10px;color:#6B5B3E;line-height:1.8;}
+.empty{text-align:center;padding:50px 20px;color:var(--tx3);}.empty-i{font-size:40px;margin-bottom:12px;}.empty-t{font-size:14px;font-weight:700;margin-bottom:6px;}
 .td-e{color:var(--tx3);}.td-t{font-weight:900;font-size:13px;}
 .gc-1{background:#B91C1C}.gc-2{background:#DC2626}.gc-3{background:#EA580C}.gc-4{background:#D97706}.gc-5{background:#CA8A04}.gc-6{background:#65A30D}.gc-7{background:#16A34A}.gc-8{background:#0D9488}.gc-9{background:#2563EB}.gc-10{background:#7C3AED}.gc-0{background:#9CA3AF}
 .gcb-1{background:rgba(185,28,28,.08);border:2px solid rgba(185,28,28,.2)}.gcb-2{background:rgba(220,38,38,.08);border:2px solid rgba(220,38,38,.2)}.gcb-3{background:rgba(234,88,12,.08);border:2px solid rgba(234,88,12,.2)}.gcb-4{background:rgba(217,119,6,.08);border:2px solid rgba(217,119,6,.2)}.gcb-5{background:rgba(202,138,4,.08);border:2px solid rgba(202,138,4,.2)}.gcb-6{background:rgba(101,163,13,.08);border:2px solid rgba(101,163,13,.2)}.gcb-7{background:rgba(22,163,74,.08);border:2px solid rgba(22,163,74,.2)}.gcb-8{background:rgba(13,148,136,.08);border:2px solid rgba(13,148,136,.2)}.gcb-9{background:rgba(37,99,235,.08);border:2px solid rgba(37,99,235,.2)}.gcb-10{background:rgba(124,58,237,.08);border:2px solid rgba(124,58,237,.2)}
 .gct-1{color:#B91C1C}.gct-2{color:#DC2626}.gct-3{color:#EA580C}.gct-4{color:#D97706}.gct-5{color:#CA8A04}.gct-6{color:#65A30D}.gct-7{color:#16A34A}.gct-8{color:#0D9488}.gct-9{color:#2563EB}.gct-10{color:#7C3AED}
 .mo{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;}
 .mod{background:#fff;border-radius:14px;padding:20px;max-width:380px;width:100%;box-shadow:0 16px 48px rgba(0,0,0,.2);}
-.mod h3{font-size:15px;font-weight:800;margin-bottom:10px;}
-.mod p{font-size:12px;color:var(--tx2);margin-bottom:14px;line-height:1.6;}
-.mod-b{display:flex;gap:8px;justify-content:flex-end;}
-.mod-btn{padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;}
+.mod h3{font-size:15px;font-weight:800;margin-bottom:10px;}.mod p{font-size:12px;color:var(--tx2);margin-bottom:14px;line-height:1.6;}
+.mod-b{display:flex;gap:8px;justify-content:flex-end;}.mod-btn{padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;}
 .mod-c{background:#F1F5F9;color:var(--tx2);}.mod-d{background:var(--red);color:#fff;}
 </style>
 </head>
@@ -141,7 +123,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);
 <div class="hd">
   <div class="hd-sub">2026학년도 1교1기</div>
   <div class="hd-title">🏃 줄넘기 급수 계산기</div>
-  <div class="hd-desc">대한줄넘기협회 기준 · 자동 저장</div>
+  <div class="hd-desc">대한줄넘기협회 기준 · 실시간 클라우드 동기화</div>
   <div class="stats" id="st"></div>
   <div class="tabs" id="tabs">
     <button class="tab on" data-v="input">✏️ 입력</button>
@@ -161,7 +143,29 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);
 <div id="mr"></div>
 <input type="file" id="fi" accept=".json,.csv" style="display:none">
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
 <script>
+// ── FIREBASE INIT ──
+const firebaseConfig={
+  apiKey:"AIzaSyAKbtiQ1UutXkGI2ozyTNDO3N20NQ9vjDE",
+  authDomain:"jump-rope-43833.firebaseapp.com",
+  databaseURL:"https://jump-rope-43833-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"jump-rope-43833",
+  storageBucket:"jump-rope-43833.firebasestorage.app",
+  messagingSenderId:"870652268913",
+  appId:"1:870652268913:web:6b45cabb7e317827b1a6d0"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+const dbRef=db.ref('jumprope_data');
+let syncStatus='connecting'; // connecting, online, offline, error
+let isLoadingFromFirebase=false;
+let saveTimer=null;
+
+// ── DATA ──
 const EV=[
   {id:"a",nm:"오래뛰기",u:"초",t:1,th:[180,150,120,90,60,50,40,30,20,10],lb:["3분","2분30초","2분","1분30초","1분","50초","40초","30초","20초","10초"],color:"#4DA3E8"},
   {id:"b",nm:"양발모아",u:"개",th:[300,250,200,150,100,80,50,30,20,10],lb:["300","250","200","150","100","80","50","30","20","10"],color:"#2DAA6E"},
@@ -176,17 +180,48 @@ const EF=["오래뛰기","양발 모아 뛰기","양발 번갈아 뛰기","뒤�
 const GT=[{m:70,g:"1급",n:1},{m:60,g:"2급",n:2},{m:50,g:"3급",n:3},{m:40,g:"4급",n:4},{m:30,g:"5급",n:5},{m:20,g:"6급",n:6},{m:10,g:"7급",n:7},{m:8,g:"8급",n:8},{m:6,g:"9급",n:9},{m:4,g:"10급",n:10}];
 const SR=[["유치원","한고은","여"],["유치원","장유주","여"],["유치원","구혜성","남"],["유치원","구찬성","남"],["1","권민솔","여"],["1","고지호","남"],["1","고지윤","여"],["1","김도윤","남"],["2","김유민","남"],["2","김지수","여"],["3","김대현","남"],["3","나대한","남"],["3","민주은","여"],["3","백은성","남"],["3","신서희","여"],["4","구민준","남"],["4","구보람","여"],["4","권윤호","남"],["4","김다원","여"],["4","김연아","여"],["4","박누리","여"],["4","성부겸","남"],["4","염태호","남"],["4","원지호","남"],["4","이건호","남"],["4","이도훈","남"],["5","백예진","여"],["5","김수연","여"],["5","김하솜","여"],["5","한호은","남"],["6","고윤아","여"],["6","구승현","남"],["6","구정현","여"],["6","김은혁","남"],["6","민가은","여"],["6","백은유","여"],["6","백채원","여"],["6","원지민","여"],["6","유시우","남"],["6","이시연","여"],["6","이우빈","남"],["6","이태훈","남"],["6","조유라","여"],["6","주현석","남"],["6","김봄","여"],["6","최지성","남"]];
 
-const SAVE_KEY='jumprope_2026_v5';
 let S=SR.map((s,i)=>({id:i,gr:s[0],nm:s[1],gd:s[2],ms:[]}));
 let cM=0,cV="input",fG="전체",sT="",rM=0,smT=null,openH={};
 const AG=["전체",...[...new Set(SR.map(s=>s[0]))]];
 
-function autoSave(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({v:5,cM,students:S.map(s=>({gr:s.gr,nm:s.nm,gd:s.gd,ms:s.ms}))}));}catch(e){}}
-function autoLoad(){
-  try{const r=localStorage.getItem(SAVE_KEY);if(!r)return false;const d=JSON.parse(r),arr=d.students;if(!arr)return false;
-    arr.forEach(ld=>{const ex=S.find(s=>s.gr===(ld.gr||ld.grade)&&s.nm===(ld.nm||ld.name));if(ex)ex.ms=ld.ms||ld.measurements||[];});
-    if(typeof d.cM==='number')cM=d.cM;if(cM>=mC()&&mC()>0)cM=mC()-1;return true;}catch(e){return false;}
+// ── FIREBASE SYNC ──
+function saveToCloud(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    try{
+      const data={v:5,cM,ts:Date.now(),students:S.map(s=>({gr:s.gr,nm:s.nm,gd:s.gd,ms:s.ms}))};
+      dbRef.set(data).then(()=>{syncStatus='online';rSt();}).catch(()=>{syncStatus='error';rSt();});
+    }catch(e){syncStatus='error';rSt();}
+  },300); // debounce 300ms
 }
+
+function loadFromCloud(snapshot){
+  const data=snapshot.val();
+  if(!data||!data.students)return;
+  isLoadingFromFirebase=true;
+  data.students.forEach(ld=>{
+    const ex=S.find(s=>s.gr===ld.gr&&s.nm===ld.nm);
+    if(ex)ex.ms=ld.ms||[];
+  });
+  if(typeof data.cM==='number')cM=data.cM;
+  if(cM>=mC()&&mC()>0)cM=mC()-1;
+  syncStatus='online';
+  R();
+  isLoadingFromFirebase=false;
+}
+
+// Listen for realtime changes
+dbRef.on('value',(snapshot)=>{
+  loadFromCloud(snapshot);
+},{cancelCallback:()=>{syncStatus='error';rSt();}});
+
+// Connection status
+db.ref('.info/connected').on('value',(snap)=>{
+  syncStatus=snap.val()?'online':'offline';
+  rSt();
+});
+
+// ── UTILS ──
 const eS=()=>{const o={};EV.forEach(e=>o[e.id]="");return o;};
 const dS=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1).toString().padStart(2,'0')+'-'+d.getDate().toString().padStart(2,'0');};
 const dToHtml=d=>(d||'').replace(/\./g,'-');
@@ -204,15 +239,11 @@ const gl=g=>g==="유치원"?"유치원":g+"학년";
 const bI=s=>{let bt=-1,bi=0;s.ms.forEach((m,i)=>{const t=cT(m.scores);if(t>bt){bt=t;bi=i;}});return bi;};
 const enM=s=>{while(s.ms.length<mC()){const idx=s.ms.length;s.ms.push({date:S[0].ms[idx]?S[0].ms[idx].date:dS(),scores:eS()});}};
 
-function addMA(dateVal){const d=dateVal||dS();S.forEach(s=>s.ms.push({date:d,scores:eS()}));cM=mC()-1;autoSave();R();}
-function delMA(i){if(mC()<=1)return;S.forEach(s=>{if(i<s.ms.length)s.ms.splice(i,1);});if(cM>=mC())cM=mC()-1;autoSave();R();}
-function changeMDate(mi,nd){if(!nd)return;S.forEach(s=>{if(s.ms[mi])s.ms[mi].date=nd;});autoSave();R();}
+function addMA(dateVal){const d=dateVal||dS();S.forEach(s=>s.ms.push({date:d,scores:eS()}));cM=mC()-1;saveToCloud();R();}
+function delMA(i){if(mC()<=1)return;S.forEach(s=>{if(i<s.ms.length)s.ms.splice(i,1);});if(cM>=mC())cM=mC()-1;saveToCloud();R();}
+function changeMDate(mi,nd){if(!nd)return;S.forEach(s=>{if(s.ms[mi])s.ms[mi].date=nd;});saveToCloud();R();}
 
-function shareDate(mi){
-  const d={v:5,type:'single',measurement:mi+1,date:S[0].ms[mi]?.date||'',students:S.map(s=>{const m=s.ms[mi];if(!m)return null;const t=cT(m.scores),g=gG(t);return{gr:s.gr,nm:s.nm,gd:s.gd,scores:m.scores,total:t,grade:g.g};}).filter(Boolean)};
-  dlF(JSON.stringify(d,null,2),`줄넘기_${mi+1}차_${S[0].ms[mi]?.date||dS()}.json`,'application/json');sm(`📤 ${mi+1}차 결과 저장!`);
-}
-function svF(){dlF(JSON.stringify({v:5,cM,students:S.map(s=>({gr:s.gr,nm:s.nm,gd:s.gd,ms:s.ms}))},null,2),`줄넘기_전체기록_${dS()}.json`,'application/json');sm('💾 전체 저장!');}
+function svF(){dlF(JSON.stringify({v:5,cM,students:S.map(s=>({gr:s.gr,nm:s.nm,gd:s.gd,ms:s.ms}))},null,2),`줄넘기_전체기록_${dS()}.json`,'application/json');sm('💾 파일 저장!');}
 function dlF(c,n,t){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:t}));a.download=n;a.click();}
 function exCSV(){
   const mc=mC();if(!mc){sm('⚠️ 데이터 없음');return;}
@@ -228,7 +259,7 @@ document.getElementById('fi').addEventListener('change',function(e){
 function loadJSON(text){
   try{const d=JSON.parse(text),arr=d.s||d.students;if(!arr)throw new Error('형식 오류');
     arr.forEach(ld=>{const ex=S.find(s=>s.gr===(ld.gr||ld.grade)&&s.nm===(ld.nm||ld.name));if(ex&&(ld.ms||ld.measurements))ex.ms=ld.ms||ld.measurements;});
-    cM=Math.max(0,mC()-1);autoSave();sm('📂 JSON 불러오기!');R();}catch(err){alert('오류: '+err.message);}
+    cM=Math.max(0,mC()-1);saveToCloud();sm('📂 불러오기 완료!');R();}catch(err){alert('오류: '+err.message);}
 }
 function loadCSV(text){
   try{const lines=text.replace(/^\uFEFF/,'').split('\n').map(l=>l.trim()).filter(l=>l);if(lines.length<2)return;
@@ -238,7 +269,7 @@ function loadCSV(text){
     const rds=Object.values(rm);while(mC()<rds.length){const d=rds[mC()]?.date||dS();S.forEach(s=>s.ms.push({date:d,scores:eS()}));}
     rds.forEach((rd,mi)=>{if(rd.date)S.forEach(s=>{if(s.ms[mi])s.ms[mi].date=rd.date;});
       rd.rows.forEach(c=>{const nm=(iN>=0?c[iN]:'').trim();let st=S.find(s=>s.nm===nm);if(!st&&iG>=0){const gv=(c[iG]||'').replace(/학년/,'').trim(),gk=gv==='유치원'?'유치원':gv.replace(/[^0-9]/g,'');st=S.find(s=>(s.gr===gk||s.gr===gv)&&s.nm===nm);}if(!st)return;enM(st);evC.forEach((ci,ei)=>{if(ci>=0&&c[ci]!==undefined){const v=c[ci].replace(/[^0-9.]/g,'').trim();if(v)st.ms[mi].scores[EV[ei].id]=v;}});});});
-    cM=Math.max(0,mC()-1);autoSave();sm('📂 CSV 불러오기!');R();}catch(err){alert('오류: '+err.message);}
+    cM=Math.max(0,mC()-1);saveToCloud();sm('📂 CSV 불러오기!');R();}catch(err){alert('오류: '+err.message);}
 }
 function pCSV(l){const r=[];let c='',q=false;for(let i=0;i<l.length;i++){const ch=l[i];if(ch==='"')q=!q;else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}r.push(c);return r;}
 
@@ -264,10 +295,13 @@ function rSt(){
   const dist={};comp.forEach(s=>{const g=gG(cT(s.ms[last].scores));dist[g.g]=(dist[g.g]||0)+1;});
   let h=`<span>👤 <strong>${S.length}</strong>명</span><span>📏 <strong>${mc}</strong>회차</span><span>📝 <strong>${comp.length}</strong>명</span>`;
   Object.entries(dist).sort().slice(0,4).forEach(([g,c])=>{const n=GT.find(x=>x.g===g);h+=`<span><span class="gbsm ${gc(n?n.n:0)}">${g}</span>${c}</span>`;});
-  h+=`<span class="as-ind"><span class="as-dot"></span>자동저장</span>`;document.getElementById('st').innerHTML=h;
+  const syncLabel={connecting:'연결중...',online:'☁️ 클라우드 동기화',offline:'오프라인',error:'동기화 오류'};
+  const syncDot={connecting:'sync-off',online:'sync-on',offline:'sync-off',error:'sync-err'};
+  h+=`<span class="sync-ind"><span class="sync-dot ${syncDot[syncStatus]}"></span>${syncLabel[syncStatus]}</span>`;
+  document.getElementById('st').innerHTML=h;
 }
 function rSB(){
-  document.getElementById('saveBar').innerHTML=`<div class="sbar"><button class="sbtn b-save" onclick="svF()">💾 전체 저장</button><button class="sbtn b-load" onclick="impF()">📂 불러오기</button><button class="sbtn b-exp" onclick="exCSV()">📊 엑셀 내보내기</button><button class="sbtn b-imp" onclick="impF()">📥 엑셀 가져오기</button><button class="sbtn b-rst" onclick="modal('⚠️ 전체 초기화','모든 기록이 삭제됩니다.',function(){S.forEach(function(s){s.ms=[]});cM=0;autoSave();R();sm('🗑️ 초기화');})">🗑️</button><div class="smsg" id="smsg"></div></div>`;
+  document.getElementById('saveBar').innerHTML=`<div class="sbar"><button class="sbtn b-save" onclick="svF()">💾 파일 백업</button><button class="sbtn b-load" onclick="impF()">📂 불러오기</button><button class="sbtn b-exp" onclick="exCSV()">📊 엑셀</button><button class="sbtn b-rst" onclick="modal('⚠️ 전체 초기화','모든 기록이 삭제됩니다. 모든 기기에서 삭제됩니다!',function(){S.forEach(function(s){s.ms=[]});cM=0;saveToCloud();R();sm('🗑️ 초기화');})">🗑️</button><div class="smsg" id="smsg"></div></div>`;
 }
 function rFB(){
   const f=fS();let h='<div class="fbar"><div class="gfilters">';
@@ -278,87 +312,52 @@ function rFB(){
   document.getElementById('sb').addEventListener('input',e=>{sT=e.target.value;R();});
 }
 
-// ── INPUT VIEW: KEY FIX - never full-rerender while typing ──
 function rI(){
   const fs=fS(),mc=mC();
   let h='<div class="mbar"><label>📏 회차:</label>';
-  if(mc===0){
-    h+=`<input type="date" class="date-inp" id="newDate" value="${dS()}"><button class="mbtn b-am" onclick="addMA(document.getElementById('newDate').value)">+ 1차 측정 시작</button>`;
-  } else {
-    h+='<select class="msel" id="msl">';for(let i=0;i<mc;i++)h+=`<option value="${i}" ${cM===i?'selected':''}>${i+1}차 (${dToDisp(S[0].ms[i].date)})</option>`;h+=`</select>`;
-    h+=`<input type="date" class="date-inp" id="curDate" value="${dToHtml(S[0].ms[cM]?.date)}" title="날짜 변경">`;
-    h+=`<button class="mbtn b-am" onclick="addWithDate()">+ 추가</button>`;
-    if(mc>1)h+=`<button class="mbtn b-dm" onclick="modal('${cM+1}차 삭제','이 회차가 삭제됩니다.',function(){delMA(${cM});})">🗑️</button>`;
-    h+=`<button class="mbtn b-share" onclick="shareDate(${cM})">📤 공유</button>`;
-  }
+  if(mc===0){h+=`<input type="date" class="date-inp" id="newDate" value="${dS()}"><button class="mbtn b-am" onclick="addMA(document.getElementById('newDate').value)">+ 1차 측정 시작</button>`;}
+  else{h+='<select class="msel" id="msl">';for(let i=0;i<mc;i++)h+=`<option value="${i}" ${cM===i?'selected':''}>${i+1}차 (${dToDisp(S[0].ms[i].date)})</option>`;h+=`</select><input type="date" class="date-inp" id="curDate" value="${dToHtml(S[0].ms[cM]?.date)}"><button class="mbtn b-am" onclick="addWithDate()">+ 추가</button>`;
+    if(mc>1)h+=`<button class="mbtn b-dm" onclick="modal('${cM+1}차 삭제','삭제됩니다.',function(){delMA(${cM});})">🗑️</button>`;
+    h+=`<button class="mbtn b-share" onclick="shareDate(${cM})">📤 공유</button>`;}
   h+='</div>';
   if(mc===0){h+='<div class="empty"><div class="empty-i">📏</div><div class="empty-t">날짜를 선택하고 측정을 시작하세요</div></div>';document.getElementById('vInput').innerHTML=h;return;}
-
   fs.forEach((s,si)=>{
     enM(s);const m=s.ms[cM],t=cT(m.scores),g=gG(t),hi=hM(m);
-    // Header always shows total/grade placeholders so we never need to re-render
     h+=`<div class="sc" data-sid="${s.id}"><div class="sc-hd"><div class="sc-info"><span class="sc-gt">${gl(s.gr)}</span><span class="sc-nm">${s.nm}</span><span class="sc-gd">${s.gd}</span>`;
     if(s.ms.length>1)h+=`<span class="sc-mc">${s.ms.length}회</span>`;
     h+=`</div><div class="sc-res"><div style="text-align:right"><div class="sc-tl">총점</div><div class="sc-tv" id="tv${s.id}">${hi?t:'-'}</div></div><span class="gbg ${hi?gc(g.n):'gc-0'}" id="gb${s.id}">${hi?g.g:'-'}</span></div></div><div class="sg">`;
-    EV.forEach((ev,ei)=>{
-      const v=m.scores[ev.id],sc=es(ev,v),pct=(sc/10)*100,bc=sc>0?sC(sc):'#E0E7EF';
-      h+=`<div class="ec"><div class="ec-nm">${EF[ei]}</div><div class="ec-row"><input class="ec-inp" type="text" inputmode="decimal" value="${v}" placeholder="${ev.t?'초':'개수'}" data-sid="${s.id}" data-eid="${ev.id}" data-si="${si}" data-ei="${ei}" autocomplete="off"><span class="ec-u">${ev.u}</span></div><div class="ec-sr"><div class="sb"><div class="sbf" style="width:${pct}%;background:${bc}"></div></div><span class="ec-sc" style="color:${sc>0?sC(sc):'#D0D8E0'}">${sc}점</span></div></div>`;
-    });
-    h+=`</div><div class="sum"><div class="sum-h">오래뛰기: 초 단위 (2분30초→150)</div><div><span class="sum-t" id="st${s.id}">${t}</span><span class="sum-m"> / 80</span></div></div></div>`;
-  });
-
+    EV.forEach((ev,ei)=>{const v=m.scores[ev.id],sc=es(ev,v),pct=(sc/10)*100,bc=sc>0?sC(sc):'#E0E7EF';
+      h+=`<div class="ec"><div class="ec-nm">${EF[ei]}</div><div class="ec-row"><input class="ec-inp" type="text" inputmode="decimal" value="${v}" placeholder="${ev.t?'초':'개수'}" data-sid="${s.id}" data-eid="${ev.id}" data-si="${si}" data-ei="${ei}" autocomplete="off"><span class="ec-u">${ev.u}</span></div><div class="ec-sr"><div class="sb"><div class="sbf" style="width:${pct}%;background:${bc}"></div></div><span class="ec-sc" style="color:${sc>0?sC(sc):'#D0D8E0'}">${sc}점</span></div></div>`;});
+    h+=`</div><div class="sum"><div class="sum-h">오래뛰기: 초 단위 (2분30초→150)</div><div><span class="sum-t" id="st${s.id}">${t}</span><span class="sum-m"> / 80</span></div></div></div>`;});
   const el=document.getElementById('vInput');el.innerHTML=h;
-
-  const curDateEl=document.getElementById('curDate');
-  if(curDateEl)curDateEl.addEventListener('change',function(e){changeMDate(cM,e.target.value);});
-  const mslEl=document.getElementById('msl');
-  if(mslEl)mslEl.addEventListener('change',e=>{cM=parseInt(e.target.value);autoSave();R();});
-
-  // ★ INPUT HANDLER: update DOM in-place, NEVER call R() ★
+  const curDateEl=document.getElementById('curDate');if(curDateEl)curDateEl.addEventListener('change',e=>{changeMDate(cM,e.target.value);});
+  const mslEl=document.getElementById('msl');if(mslEl)mslEl.addEventListener('change',e=>{cM=parseInt(e.target.value);R();});
   el.addEventListener('input',function(e){
     if(!e.target.classList.contains('ec-inp'))return;
-    // Filter non-numeric
-    let val=e.target.value.replace(/[^0-9.]/g,'');
-    if(val!==e.target.value){
-      const pos=e.target.selectionStart-1;
-      e.target.value=val;
-      e.target.setSelectionRange(pos,pos);
-    }
+    let val=e.target.value.replace(/[^0-9.]/g,'');if(val!==e.target.value){const pos=e.target.selectionStart-1;e.target.value=val;e.target.setSelectionRange(pos,pos);}
     const sid=parseInt(e.target.dataset.sid),eid=e.target.dataset.eid;
-    const s=S.find(x=>x.id===sid);if(!s||!s.ms[cM])return;
-    s.ms[cM].scores[eid]=val;
-
-    // Update this event's score bar + label (in-place)
+    const s=S.find(x=>x.id===sid);if(!s||!s.ms[cM])return;s.ms[cM].scores[eid]=val;
     const card=e.target.closest('.ec'),ev=EV.find(x=>x.id===eid),sc=es(ev,val);
     const bf=card.querySelector('.sbf');bf.style.width=(sc/10*100)+'%';bf.style.background=sc>0?sC(sc):'#E0E7EF';
     const sl=card.querySelector('.ec-sc');sl.textContent=sc+'점';sl.style.color=sc>0?sC(sc):'#D0D8E0';
-
-    // Update student total + grade (in-place, elements always exist)
     const t2=cT(s.ms[cM].scores),g2=gG(t2),hi2=hM(s.ms[cM]);
     const tvEl=document.getElementById('tv'+sid);if(tvEl)tvEl.textContent=hi2?t2:'-';
     const gbEl=document.getElementById('gb'+sid);if(gbEl){gbEl.textContent=hi2?g2.g:'-';gbEl.className='gbg '+(hi2?gc(g2.n):'gc-0');}
     const stEl=document.getElementById('st'+sid);if(stEl)stEl.textContent=t2;
-
-    // Update stats header (lightweight)
-    rSt();
-    // Auto save
-    autoSave();
+    rSt();saveToCloud();
   });
-
   el.addEventListener('keydown',function(e){
     if(!e.target.classList.contains('ec-inp'))return;
-    if(e.key==='Enter'||e.key==='Tab'){
-      e.preventDefault();const card=e.target.closest('.sc'),inputs=Array.from(card.querySelectorAll('.ec-inp')),idx=inputs.indexOf(e.target);
+    if(e.key==='Enter'||e.key==='Tab'){e.preventDefault();const card=e.target.closest('.sc'),inputs=Array.from(card.querySelectorAll('.ec-inp')),idx=inputs.indexOf(e.target);
       if(idx<inputs.length-1){inputs[idx+1].focus();inputs[idx+1].select();}
-      else{const all=Array.from(document.querySelectorAll('.sc')),ci=all.indexOf(card);
-        if(ci<all.length-1){const ni=all[ci+1].querySelector('.ec-inp');if(ni){ni.focus();ni.select();ni.scrollIntoView({behavior:'smooth',block:'center'});}}}
-    }
+      else{const all=Array.from(document.querySelectorAll('.sc')),ci=all.indexOf(card);if(ci<all.length-1){const ni=all[ci+1].querySelector('.ec-inp');if(ni){ni.focus();ni.select();ni.scrollIntoView({behavior:'smooth',block:'center'});}}}}
   });
 }
-
-window.addWithDate=function(){
-  modal('📅 새 측정 추가','<div style="margin-bottom:8px">측정 날짜를 선택하세요:</div><input type="date" id="addDatePick" value="'+dS()+'" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;">',function(){addMA(document.getElementById('addDatePick')?.value||dS());});
-};
+function shareDate(mi){
+  const d={v:5,type:'single',measurement:mi+1,date:S[0].ms[mi]?.date||'',students:S.map(s=>{const m=s.ms[mi];if(!m)return null;const t=cT(m.scores),g=gG(t);return{gr:s.gr,nm:s.nm,gd:s.gd,scores:m.scores,total:t,grade:g.g};}).filter(Boolean)};
+  dlF(JSON.stringify(d,null,2),`줄넘기_${mi+1}차_${S[0].ms[mi]?.date||dS()}.json`,'application/json');sm(`📤 ${mi+1}차 공유 저장!`);
+}
+window.addWithDate=function(){modal('📅 새 측정 추가','<input type="date" id="addDatePick" value="'+dS()+'" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;">',function(){addMA(document.getElementById('addDatePick')?.value||dS());});};
 
 function rT(){
   const fs=fS(),mc=mC();let h='<div class="tw">';
@@ -372,38 +371,14 @@ function rT(){
   el.addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(b){rM=parseInt(b.dataset.rm);R();}});
 }
 
-function mkSC(s){
-  if(s.ms.length<1)return '';const mc=s.ms.length,w=Math.max(280,mc*70+60),bH=120,mT=80;
-  let v=`<svg class="chart-svg" width="${w}" height="${bH+44}" viewBox="0 0 ${w} ${bH+44}">`;
-  for(let i=0;i<=4;i++){const y=10+bH-(i/4)*bH;v+=`<line x1="40" y1="${y}" x2="${w-10}" y2="${y}" stroke="#E0E7EF"/><text x="36" y="${y+3}" text-anchor="end" font-size="9" fill="#A4B3C2">${Math.round(mT*i/4)}</text>`;}
-  const bW=Math.min(36,Math.max(20,(w-80)/mc-8));
-  s.ms.forEach((m,i)=>{const t=cT(m.scores),x=50+i*((w-70)/mc),h2=(t/mT)*bH,g=gG(t),cls=['#9CA3AF','#7C3AED','#2563EB','#0D9488','#16A34A','#65A30D','#CA8A04','#D97706','#EA580C','#DC2626','#B91C1C'],cl=g.n?cls[g.n]:'#9CA3AF';
-    v+=`<rect x="${x}" y="${10+bH-h2}" width="${bW}" height="${h2}" rx="3" fill="${cl}" opacity=".85"/><text x="${x+bW/2}" y="${10+bH-h2-4}" text-anchor="middle" font-size="10" font-weight="800" fill="${cl}">${t}</text><text x="${x+bW/2}" y="${bH+28}" text-anchor="middle" font-size="9" fill="#6B7D8F">${i+1}차</text><text x="${x+bW/2}" y="${bH+40}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(m.date).slice(5)}</text>`;});
-  v+=`</svg>`;return v;
-}
-function mkEC(s){
-  if(s.ms.length<2)return '';const mc=s.ms.length,w=Math.max(280,mc*60+80),h=130,p=45,tp=15;
-  let v=`<svg class="chart-svg" width="${w}" height="${h+45}" viewBox="0 0 ${w} ${h+45}">`;
-  for(let i=0;i<=5;i++){const y=tp+(h/5)*(5-i);v+=`<line x1="${p}" y1="${y}" x2="${w-10}" y2="${y}" stroke="#F0F3F7"/><text x="${p-4}" y="${y+3}" text-anchor="end" font-size="8" fill="#A4B3C2">${i*2}</text>`;}
-  for(let mi=0;mi<mc;mi++){const x=p+mi*((w-p-10)/(mc-1||1));v+=`<text x="${x}" y="${h+tp+14}" text-anchor="middle" font-size="9" fill="#6B7D8F">${mi+1}차</text><text x="${x}" y="${h+tp+24}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(s.ms[mi].date).slice(5)}</text>`;}
-  EV.forEach(ev=>{const pts=s.ms.map((m,mi)=>{const sc=es(ev,m.scores[ev.id]),x=p+mi*((w-p-10)/(mc-1||1)),y=tp+h-(sc/10)*h;return{x,y};});let d='';pts.forEach((pt,i)=>{d+=(i===0?'M':'L')+pt.x+' '+pt.y;});
-    v+=`<path d="${d}" fill="none" stroke="${ev.color}" stroke-width="2" stroke-linecap="round" opacity=".7"/>`;pts.forEach(pt=>{v+=`<circle cx="${pt.x}" cy="${pt.y}" r="3" fill="${ev.color}"/>`;});});
-  v+=`</svg>`;return v;
-}
-function mkGF(s){
-  if(s.ms.length<1)return '';let h='<div class="grade-flow">';
-  s.ms.forEach((m,i)=>{const t=cT(m.scores),g=gG(t);
-    if(i>0){const pt=cT(s.ms[i-1].scores),d=t-pt;h+=`<div class="gf-arrow">${d>0?'→ <span style="color:var(--green);font-weight:800">▲+'+d+'</span>':d<0?'→ <span style="color:var(--red);font-weight:800">▼'+d+'</span>':'→ <span style="color:var(--tx3)">＝</span>'}</div>`;}
-    h+=`<div class="gf-item"><div class="gf-label">${i+1}차 (${dToDisp(m.date).slice(5)})</div><span class="gbg ${gc(g.n)}" style="font-size:11px;padding:2px 8px">${g.g}</span><div style="font-size:10px;font-weight:800;margin-top:2px">${t}점</div></div>`;});
-  h+='</div>';return h;
-}
+function mkSC(s){if(s.ms.length<1)return '';const mc=s.ms.length,w=Math.max(280,mc*70+60),bH=120,mT=80;let v=`<svg class="chart-svg" width="${w}" height="${bH+44}" viewBox="0 0 ${w} ${bH+44}">`;for(let i=0;i<=4;i++){const y=10+bH-(i/4)*bH;v+=`<line x1="40" y1="${y}" x2="${w-10}" y2="${y}" stroke="#E0E7EF"/><text x="36" y="${y+3}" text-anchor="end" font-size="9" fill="#A4B3C2">${Math.round(mT*i/4)}</text>`;}const bW=Math.min(36,Math.max(20,(w-80)/mc-8));s.ms.forEach((m,i)=>{const t=cT(m.scores),x=50+i*((w-70)/mc),h2=(t/mT)*bH,g=gG(t),cls=['#9CA3AF','#7C3AED','#2563EB','#0D9488','#16A34A','#65A30D','#CA8A04','#D97706','#EA580C','#DC2626','#B91C1C'],cl=g.n?cls[g.n]:'#9CA3AF';v+=`<rect x="${x}" y="${10+bH-h2}" width="${bW}" height="${h2}" rx="3" fill="${cl}" opacity=".85"/><text x="${x+bW/2}" y="${10+bH-h2-4}" text-anchor="middle" font-size="10" font-weight="800" fill="${cl}">${t}</text><text x="${x+bW/2}" y="${bH+28}" text-anchor="middle" font-size="9" fill="#6B7D8F">${i+1}차</text><text x="${x+bW/2}" y="${bH+40}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(m.date).slice(5)}</text>`;});v+=`</svg>`;return v;}
+function mkEC(s){if(s.ms.length<2)return '';const mc=s.ms.length,w=Math.max(280,mc*60+80),h=130,p=45,tp=15;let v=`<svg class="chart-svg" width="${w}" height="${h+45}" viewBox="0 0 ${w} ${h+45}">`;for(let i=0;i<=5;i++){const y=tp+(h/5)*(5-i);v+=`<line x1="${p}" y1="${y}" x2="${w-10}" y2="${y}" stroke="#F0F3F7"/><text x="${p-4}" y="${y+3}" text-anchor="end" font-size="8" fill="#A4B3C2">${i*2}</text>`;}for(let mi=0;mi<mc;mi++){const x=p+mi*((w-p-10)/(mc-1||1));v+=`<text x="${x}" y="${h+tp+14}" text-anchor="middle" font-size="9" fill="#6B7D8F">${mi+1}차</text><text x="${x}" y="${h+tp+24}" text-anchor="middle" font-size="7" fill="#A4B3C2">${dToDisp(s.ms[mi].date).slice(5)}</text>`;}EV.forEach(ev=>{const pts=s.ms.map((m,mi)=>{const sc=es(ev,m.scores[ev.id]),x=p+mi*((w-p-10)/(mc-1||1)),y=tp+h-(sc/10)*h;return{x,y};});let d='';pts.forEach((pt,i)=>{d+=(i===0?'M':'L')+pt.x+' '+pt.y;});v+=`<path d="${d}" fill="none" stroke="${ev.color}" stroke-width="2" stroke-linecap="round" opacity=".7"/>`;pts.forEach(pt=>{v+=`<circle cx="${pt.x}" cy="${pt.y}" r="3" fill="${ev.color}"/>`;});});v+=`</svg>`;return v;}
+function mkGF(s){if(s.ms.length<1)return '';let h='<div class="grade-flow">';s.ms.forEach((m,i)=>{const t=cT(m.scores),g=gG(t);if(i>0){const pt=cT(s.ms[i-1].scores),d=t-pt;h+=`<div class="gf-arrow">${d>0?'→ <span style="color:var(--green);font-weight:800">▲+'+d+'</span>':d<0?'→ <span style="color:var(--red);font-weight:800">▼'+d+'</span>':'→ <span style="color:var(--tx3)">＝</span>'}</div>`;}h+=`<div class="gf-item"><div class="gf-label">${i+1}차 (${dToDisp(m.date).slice(5)})</div><span class="gbg ${gc(g.n)}" style="font-size:11px;padding:2px 8px">${g.g}</span><div style="font-size:10px;font-weight:800;margin-top:2px">${t}점</div></div>`;});h+='</div>';return h;}
 
 function rH(){
-  const fs=fS(),mc=mC();
-  if(!mc){document.getElementById('vHistory').innerHTML='<div class="empty"><div class="empty-i">📈</div><div class="empty-t">측정 기록 없음</div></div>';return;}
+  const fs=fS(),mc=mC();if(!mc){document.getElementById('vHistory').innerHTML='<div class="empty"><div class="empty-i">📈</div><div class="empty-t">측정 기록 없음</div></div>';return;}
   let h='';
-  fs.forEach(s=>{
-    if(!hA(s))return;const bi=bI(s),io=openH[s.id]!==false;
+  fs.forEach(s=>{if(!hA(s))return;const bi=bI(s),io=openH[s.id]!==false;
     h+=`<div class="h-card"><div class="h-hd" data-hid="${s.id}"><div class="sc-info"><span class="sc-gt">${gl(s.gr)}</span><span class="sc-nm">${s.nm}</span><span class="sc-gd">${s.gd}</span></div><div class="sc-res">`;
     if(s.ms.length>0){const bt=cT(s.ms[bi].scores),bg=gG(bt);h+=`<div style="text-align:right"><div class="sc-tl">최고</div><div class="sc-tv">${bt}</div></div><span class="gbg ${gc(bg.n)}">${bg.g}</span>`;}
     h+=`<span class="h-toggle ${io?'open':''}">▼</span></div></div>`;
@@ -425,11 +400,17 @@ function rR(){
   let h='<div class="rs"><div class="rh"><div class="rh-t">📋 종목별 점수 기준표</div><div class="rh-d">대한줄넘기협회 제정</div></div><table class="rft"><thead><tr><th>종목</th>';
   for(let i=10;i>=1;i--)h+=`<th>${i}점</th>`;h+='</tr></thead><tbody>';EV.forEach((e,i)=>{h+=`<tr><td class="ecol">${EF[i]}<small>(${e.u})</small></td>`;e.lb.forEach(l=>h+=`<td>${l}</td>`);h+='</tr>';});h+='</tbody></table></div>';
   h+='<div class="rs"><div class="rh"><div class="rh-t">🏅 급수 기준표</div><div class="rh-d">8종목 총점 합계 (만점 80점)</div></div><div class="gcards">';GT.forEach(g=>{h+=`<div class="gci ${gcb(g.n)}"><div class="gci-n ${gct(g.n)}">${g.g}</div><div class="gci-m" style="color:var(--tx2)">${g.m}점 이상</div></div>`;});h+='</div></div>';
-  h+=`<div class="ibox"><h3>💡 사용 안내</h3><p><strong>✅ 자동 저장:</strong> 입력 즉시 저장. 브라우저 닫아도 유지.<br><strong>📅 날짜 지정:</strong> 측정 추가 시 날짜 선택 가능. 기존 회차 날짜도 변경 가능.<br><strong>📤 회차별 공유:</strong> "공유" 버튼으로 날짜별 결과 파일 저장.<br><strong>📊 엑셀 내보내기:</strong> 날짜별·학생별·영역별 CSV 저장.<br><strong>📥 엑셀 가져오기:</strong> 수정한 CSV 업로드하면 자동 반영.<br><strong>⌨️ 입력:</strong> 키보드 숫자 직접 입력. Enter/Tab→다음. 오래뛰기는 초 (2분30초→150).</p></div>`;
+  h+=`<div class="ibox"><h3>💡 사용 안내</h3><p>
+  <strong>☁️ 실시간 동기화:</strong> 인터넷만 되면 누가, 어디서 입력하든 모든 기기에서 자동으로 반영됩니다.<br>
+  <strong>📅 날짜 지정:</strong> 측정 추가 시 날짜 선택 가능.<br>
+  <strong>💾 파일 백업:</strong> 만약을 위해 파일로 백업해두세요.<br>
+  <strong>📊 엑셀:</strong> CSV로 내보내기 가능.<br>
+  <strong>⌨️ 입력:</strong> 숫자 직접 입력. Enter/Tab→다음. 오래뛰기는 초 (2분30초→150).</p></div>`;
   document.getElementById('vRef').innerHTML=h;
 }
 
-const loaded=autoLoad();R();if(loaded&&mC()>0)sm('✅ 저장된 기록을 불러왔습니다.');
+// Initial render
+R();
 </script>
 </body>
 </html>
